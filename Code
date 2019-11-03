@@ -1,0 +1,48 @@
+input.buttonA.onEvent(ButtonEvent.Click, function () {
+    if (lampje == 2) {
+        win += -100
+    } else {
+        win = 1100
+    }
+})
+input.buttonB.onEvent(ButtonEvent.Click, function () {
+    win = 1001
+    lampje = 0
+    light.clear()
+    light.setPixelColor(lampje, 0x00ffff)
+    light.setPixelColor(2, 0xff8000)
+})
+let lampje = 0
+let win = 0
+win = 1001
+lampje = 0
+light.setPixelColor(lampje, 0x00ffff)
+light.setPixelColor(2, 0xff8000)
+forever(function () {
+    pause(win)
+    if (win == 1) {
+        music.baDing.playUntilDone()
+        light.setAll(light.rgb(Math.randomRange(0, 255), Math.randomRange(0, 255), Math.randomRange(0, 255)))
+    } else if (win == 1100) {
+        music.wawawawaa.play()
+        light.showRing(
+        "red red red red red red red red red red"
+        )
+    } else {
+        if (lampje == 9) {
+            light.clear()
+            lampje = 0
+            light.setPixelColor(lampje, 0x00ffff)
+        } else {
+            light.clear()
+            lampje += 1
+            light.setPixelColor(lampje, 0x00ffff)
+        }
+    }
+})
+forever(function () {
+    if (lampje != 2) {
+        light.setPixelColor(2, light.rgb(Math.randomRange(0, 255), Math.randomRange(0, 255), Math.randomRange(0, 255)))
+    }
+    pause(50)
+})
